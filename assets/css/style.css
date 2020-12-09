@@ -1,0 +1,86 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+
+html {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(71, 86, 92, .3);
+}
+
+.container {
+    padding: .8rem;
+    font-size: .8rem;
+    color: rgba(71, 86, 92, 1)
+}
+
+.main-container {
+    padding: 1rem;
+    width: 60vw;
+    height: auto;
+    margin: auto;
+    background-color: rgba(244, 247, 252, 1);
+    border: 1px solid rgba(71, 86, 92, 1);
+    border-radius: .2rem;
+}
+
+.actual-date {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    color: rgb(192, 63, 84);
+}
+
+input {
+    border: 1px solid rgba(71, 86, 92, 1);
+    padding: .3rem 1rem;
+    width: 80%;
+    border-radius: .2rem;
+}
+
+.add-todo {
+    border: 1px solid rgba(71, 86, 92, 1);
+    background-color: rgb(148, 148, 148);
+    padding: .3rem 0;
+    width: 15%;
+    border-radius: .2rem;
+    text-align: center;
+    float: right;
+    cursor: pointer;
+}
+
+.add-todo:hover {
+    background-color: rgb(75, 147, 195);
+}
+
+.todo-item {
+    background-color: rgb(223, 232, 244);
+    margin-bottom: .4rem;
+    padding: .5rem .3rem .5rem 1rem;
+    font-size: .8rem;
+    color: rgba(71, 86, 92, 1)
+}
+
+.todo-item .delete-button {
+    display: none;
+}
+
+.todo-item:hover .delete-button {
+    display: inline-block;
+    border: 1px solid rgb(156, 11, 11);
+    background-color: rgb(156, 11, 11);
+    color: rgba(244, 247, 252, 1);
+    padding: 0rem .5rem;
+    border-radius: .2rem;
+    text-align: center;
+    float: right;
+    cursor: pointer;
+}
