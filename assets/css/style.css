@@ -39,7 +39,7 @@ body {
     color: rgb(192, 63, 84);
 }
 
-input {
+.todo-input {
     border: 1px solid rgba(71, 86, 92, 1);
     padding: .3rem 1rem;
     width: 80%;
@@ -61,19 +61,48 @@ input {
     background-color: rgb(75, 147, 195);
 }
 
-.todo-item {
+.todo-counter {
+    padding: 1.5rem 0 0 0;
+}
+
+.counter {
+    font-weight: 800;
+}
+
+
+
+
+
+.todo-container {
+    padding-top: 0;
+}
+
+.todo-container .todo-item {
     background-color: rgb(223, 232, 244);
     margin-bottom: .4rem;
     padding: .5rem .3rem .5rem 1rem;
     font-size: .8rem;
-    color: rgba(71, 86, 92, 1)
+    color: rgba(71, 86, 92, 1);
+}
+
+.hide {
+    display: none;
+}
+
+.completed-container .todo-item {
+    background-color: rgb(255, 255, 255);
+    margin-bottom: .4rem;
+    padding: .5rem .3rem .5rem 1rem;
+    font-size: .8rem;
+    color: rgb(115, 132, 139);
+    text-decoration: line-through;
 }
 
 .todo-item .delete-button {
     display: none;
 }
 
-.todo-item:hover .delete-button {
+.todo-container .todo-item:hover .delete-button {
     display: inline-block;
     border: 1px solid rgb(156, 11, 11);
     background-color: rgb(156, 11, 11);
@@ -83,4 +112,20 @@ input {
     text-align: center;
     float: right;
     cursor: pointer;
+}
+
+.completed-container .todo-item:hover .delete-button {
+    display: none;
+}
+
+
+.controller {
+    background: none;
+    font-weight: 600;
+    padding: 0 1rem;
+    cursor: pointer;
+}
+
+.controller:hover {
+    color: rgb(34, 75, 189)
 }

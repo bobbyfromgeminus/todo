@@ -14,13 +14,17 @@
             <div class="actual-date">Aktuális dátum</div>
             <input type="text" name="todo-input" id="todo-input" class="todo-input" placeholder="Take the garbage out">
             <button class="add-todo">+</button>
+            <div class="todo-counter">You have <span class="counter">0</span> pending items</div>
         </div>
 
         <div class="container todo-container"></div>
 
-        <div class="container completed-container">completed todo items</div>
+        <div class="container completed-container hide"></div>
 
-        <div class="container footer-container">controllers</div>
+        <div class="container controller-container">
+            <button class="controller show-hide">Show Complete</button>
+            <button class="controller clear-all">Clear All</button>
+        </div>
 
     </div>
     
