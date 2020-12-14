@@ -9,6 +9,9 @@ const todoCounterHolder = document.querySelector('.counter');
 const showHideButton = document.querySelector('.show-hide');
 const clearAllButton = document.querySelector('.clear-all');
 const currentDateHolder = document.querySelector('.actual-date');
+const zenTime = document.querySelector('.zen-time');
+const completedTasks = document.querySelector('.completed-tasks');
+const completedPercentageHolder = document.querySelector('.completed-percentage');
 let todoCounter = 0;
 let storageId = 1;
 
@@ -24,7 +27,6 @@ const currentDate = () => {
     const dayName = days[curDate.getDay()];
     currentDateHolder.innerHTML = `${dayName}<br>${curM}-${curD}-${curY}`;
 }
-currentDate();
 
 // localStorage kezelő objektum
 const storageHandler = {
@@ -39,11 +41,31 @@ const counterReset = () => {
     todoCounterHolder.textContent = todoCounter;
 }
 
+// Számláló lekérése
+const setZenTime = () => {
+    if (todoCounter === 0) zenTime.classList.remove('hide');
+    else zenTime.classList.add('hide');
+}
+
 // Számláló módosítása
 const counterUpdater = (direction) => {
     if (direction) todoCounter += 1;
     else todoCounter -= 1; 
     todoCounterHolder.textContent = todoCounter;
+    setZenTime();
+}
+
+// Elkészült feladatok százalákos megjelenítése
+const completedPercentage = () => {
+    let allTodos = 0;
+    let completedTodos = 0;
+    Object.keys(localStorage).forEach((key) => {
+        const obj = JSON.parse(storageHandler.get(key));
+        allTodos += 1;
+        if (parseInt(obj.state) === 2) completedTodos += 1;
+    });
+    const percentage = Math.round((completedTodos / allTodos) * 100);
+    completedPercentageHolder.textContent = `${percentage}%`;
 }
 
 // Teendő törlése
@@ -51,6 +73,7 @@ const deleteTodo = (id) => {
     document.querySelector(`[data-id="${id}"]`).parentElement.remove();
     storageHandler.reset(id);
     counterUpdater(false);
+    completedPercentage();
 }
 
 // Teendő áthelyezésre
@@ -64,6 +87,7 @@ const todoCompleted = (id) => {
     targetTodo.remove();
     completedContainer.insertBefore(targetTodo, completedContainer.firstChild);
     counterUpdater(false);
+    completedPercentage();
 }
 
 // Teendőn belüli eseménykezelők
@@ -80,6 +104,7 @@ const createTodo = (text, id, state, datetime) => {
     if (parseInt(state) === 2) {
         parentContainer = completedContainer;
         isChecked = 'checked disabled';
+        
     } else counterUpdater(true);
     todoItem.innerHTML = `  <input type="checkbox" ${isChecked} name="set-completed" class="set-completed" data-setid="${id}">
                             ${text}
@@ -97,6 +122,7 @@ const addTodo = () => {
         addSetEventListener(storageId);
         todoInput.value = '';
         storageId += 1;
+        completedPercentage();
     }
 }
 
@@ -110,15 +136,18 @@ const buildTodoList = () => {
         if(parseInt(key) >= storageId) storageId = parseInt(key) + 1;
     });
 }
+completedPercentage();
 buildTodoList();
 
 // Elvégzett teendők mutatása/elrejtése
 const setShowHide = () => {
     const btnContent = showHideButton.textContent;
     if (btnContent == 'Show Complete') {
+        completedTasks.classList.remove('hide');
         completedContainer.classList.remove('hide');
         showHideButton.textContent = 'Hide Complete'
     } else {
+        completedTasks.classList.add('hide');
         completedContainer.classList.add('hide');
         showHideButton.textContent = 'Show Complete'
     }
@@ -143,3 +172,6 @@ const clearAllClickListener = () => clearAllButton.addEventListener('click', cle
 addTodoClickListener();
 addShowHideClickListener();
 clearAllClickListener();
+
+currentDate();
+setZenTime();
